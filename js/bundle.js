@@ -14,22 +14,6 @@ featureLayer.loadURL('../data/citybikes.geojson');
 var legend = map.legendControl.addLegend(document.getElementById('legend').innerHTML);
 legend.setPosition('topright');
 
-// function getHTML() {
-//   var html = '<h2>';
-//       html += 'Stockholm City Bike Map';
-//       html += '</h2>';
-//       html += '<p>';
-//       html += '<strong>Click </strong>';
-//       html += 'on a City Bike Station on the map! ';
-//       html += 'A travel time will be generated to all the other City Bike Stations. ';
-//       html += '</p><p>';
-//       html += '<i>Note:</i> time is in <strong>minutes</strong> based on an average speed of <strong>15.5km/h</strong>.';
-//       html += '</p><p>';
-//       html += 'Data from: <a href="http://open.stockholm.se/oppna-data/" target="_blank">Stockholm City Open Data</a>';
-//       html += '</p>';
-//   return html;
-// };
-
 var units = 'kilometers'; // units for distance measurement
 
 var getDistance = function(pointA, pointB, units) {
@@ -74,11 +58,14 @@ featureLayer.on('ready', function() {
   });
   featureLayer.setGeoJSON(cityBikeDest).addTo(map);
 
+  var popupContent = function(title) {
+    return '<h6>Bike Station: <span>' + title + '</span></h6>'
+  };
 
   featureLayer.on('click', function(e) {
-    console.log(e.layer);
+
+    e.layer.bindPopup(popupContent(e.layer.feature.properties.Beskrivnin));
     e.layer.openPopup();
-    // e.layer.bringToFront();
     var cityBikeStart = e.layer.feature;
 
     $.each(cityBikeDest.features, function(index, value) {
@@ -98,6 +85,7 @@ featureLayer.on('ready', function() {
   }); // end click event
 
   featureLayer.on('mouseover', function(e) {
+    e.layer.bindPopup(popupContent(e.layer.feature.properties.Beskrivnin));
     e.layer.openPopup();
     e.layer.options.riseOnHover = true;
   });

@@ -1,7 +1,4 @@
 body {
-  font-family: 'Space Mono', monospace;
-  font-weight: 400;
-  font-size: 14px;
   margin:0;
   padding:0;
 }
@@ -16,10 +13,34 @@ h2 {
   font-weight: 700;
 }
 #map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  & .leaflet-popup-pane h6 {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: normal;
+    margin: 0;
+    padding: 4px;
+    & span {
+      font-weight: 700;
+    }
+  }
+  & .map-legend {
+    font-family: 'Space Mono', monospace;
+    font-weight: 400;
+    font-size: 14px;
+    & p {
+      font-size: 1em;
+      line-height: 1.2;
+    }
+    & h2 {
+      font-size: 1.6em;
+      line-height: 1.4;
+    }
+  }
 }
